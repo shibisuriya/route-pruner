@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Vue.js App</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <style>
+    .row {
+      display: flex;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div>{{selectRoutes}}</div>
+
+      <div v-for="route of routes">
+        <div class="row">
+          <div>
+            <input type="checkbox" v-model="route.use" @change="update" />
+          </div>
+          <div>{{route.path}}</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          selectRoutes: [],
+          user: {},
+          routes: [],
+        },
+        methods: {
+          update() {
+            this.selectRoutes = this.routes.filter((route) => {
+              if (route.use) {
+                return route;
+              }
+            });
+            axios.post("/api/update", this.selectRoutes).then((response) => {
+              console.log(response);
+            });
+          },
+        },
+        mounted() {
+          axios
+            .get("/api/routes")
+            .then((response) => {
+              const routes = response.data;
+              this.routes = routes.map((route) => {
+                route.use = false;
+                return route;
+              });
+
+              console.log(this.routes);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        },
+      });
+    </script>
+  </body>
+</html>

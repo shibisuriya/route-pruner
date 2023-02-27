@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const QuickServePlugin = require('./quickServePlugin.js');
 module.exports = defineConfig({
   lintOnSave: 'default',
   devServer: {
@@ -13,5 +14,10 @@ module.exports = defineConfig({
         errors: true,
       },
     },
+  },
+  configureWebpack: {
+    plugins: [
+      new QuickServePlugin()
+    ]
   }
 })
