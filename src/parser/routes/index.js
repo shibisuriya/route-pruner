@@ -1,5 +1,6 @@
-import settings from 'settings.js'
-import { dashboard } from 'dashboard.js'
+import { settings } from 'settings.js'
+import dashboard from 'dashboard.js'
+
 const routes = {
     linkActiveClass: 'active',
     mode: 'history',
@@ -8,6 +9,6 @@ const routes = {
             path: '/profile/:userId',
             component: () => import('./Profile.vue'),
         },
-        settings, dashboard]
+        settings]
 }
 export default routes
