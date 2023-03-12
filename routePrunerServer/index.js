@@ -55,31 +55,34 @@ function triggerHMR() {
 }
 
 app.get('/api/get-routes-file', (req, res) => {
-    console.log('Routes file update!')
-    const code = 'export default []'
-    const ast = parser.parse(code, {
-        sourceType: 'module'
-    });
-    traverse(ast, {
-        ExportDefaultDeclaration(path) {
-            const node = path.node.declaration
-            if (node.type === 'ArrayExpression') {
-                selectedRoutes.forEach(route => {
-                    console.log('route code -> ', route)
-                    const routeAst = parser.parse(`const obj = ${route}`, {
-                        sourceType: 'module'
-                    });
-                    // console.log('obj -> ', generator(routeAst.program.body[0].declarations[0].init).code)
-                    node.elements.push(routeAst.program.body[0].declarations[0].init)
-                })
+    // Added delay for demonstration purposes.
+    setTimeout(() => {
+        console.log('Routes file update!')
+        const code = 'export default []'
+        const ast = parser.parse(code, {
+            sourceType: 'module'
+        });
+        traverse(ast, {
+            ExportDefaultDeclaration(path) {
+                const node = path.node.declaration
+                if (node.type === 'ArrayExpression') {
+                    selectedRoutes.forEach(route => {
+                        console.log('route code -> ', route)
+                        const routeAst = parser.parse(`const obj = ${route}`, {
+                            sourceType: 'module'
+                        });
+                        // console.log('obj -> ', generator(routeAst.program.body[0].declarations[0].init).code)
+                        node.elements.push(routeAst.program.body[0].declarations[0].init)
+                    })
+                }
             }
-        }
-    })
-    routesFile = generator(ast).code
-    res.send({
-        selectedRoutes,
-        routesFile
-    })
+        })
+        routesFile = generator(ast).code
+        res.send({
+            selectedRoutes,
+            routesFile
+        })
+    }, 1000)
 })
 
 app.post('/api/update', async (req, res) => {

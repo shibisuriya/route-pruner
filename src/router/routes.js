@@ -1,15 +1,15 @@
 export default [
     {
         path: '/',
-        component: () => import('../views/HomeView.vue')
+        component: () => import('@/views/DashboardView.vue')
 
     },
     {
-        path: '/profile',
-        component: () => import('../views/ProfileView.vue')
+        path: '/contacts',
+        component: () => import('@/components/ContactsComponent.vue')
     },
     {
-        path: '/about',
-        component: () => import('../views/AboutView.vue')
+        path: '/settings',
+        component: () => import('@/views/SettingsView.vue')
     }
 ]

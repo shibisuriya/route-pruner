@@ -6,6 +6,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <style>
+    body {
+      margin: 0px;
+    }
     .block {
       margin: 25px;
     }
@@ -14,22 +17,36 @@
     .row {
       display: flex;
     }
+    :root {
+      font-size: 16px;
+    }
+    .top-nav {
+      padding: 1rem;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .routes-container {
+      margin-top: 2rem;
+    }
+    .routes-item {
+      font-size: 1rem;
+      margin: 1rem 1rem;
+    }
+    .checkbox {
+      margin-right: 1rem;
+    }
   </style>
   <body>
     <div id="app">
-      <div class="block">
-        <button @click="getRoutesFile">Get routes file</button>
+      <div class="top-nav">
+        <div class="row">Route Pruner</div>
       </div>
-      <div class="block">
-        <div>Selected routes -> {{selectedRoutes}}</div>
-      </div>
-      <div class="block">
-        <div>Routes file -> {{routesFile}}</div>
-      </div>
-      <div class="block">
+      <div class="routes-container">
         <div v-for="route of routes">
-          <div class="row">
-            <div>
+          <div class="row routes-item">
+            <div class="checkbox">
               <input type="checkbox" v-model="route.use" @change="update" />
             </div>
             <div>{{route.route}}</div>
