@@ -14,4 +14,12 @@ module.exports = defineConfig({
       },
     },
   },
+  chainWebpack: config => {
+    config.module
+      .rule('route-pruner-rule')
+      .test(/src\/router\/routes\.js$/)
+      .use('route-pruner')
+      .loader('./route-pruner.js')
+      .end();
+  }
 })
