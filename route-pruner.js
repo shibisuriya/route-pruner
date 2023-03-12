@@ -1,5 +1,18 @@
-function routePruner(source) {
+const axios = require('axios');
+const fs = require('fs');
+
+
+// const routePrunerServer = require('./routePrunerServer')
+async function routePruner(source) {
     console.log(source)
-    return source.replace(/hello/g, 'goodbye');
+    const response = await axios.get('http://localhost:3000/api/get-routes-file');
+    await fs.writeFile('./result.js', response.data.routesFile, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+    });
+    return response.data.routesFile
+    // return  source
+    // console.log('selected routes -> ', routePrunerServer.getSelectedRoutes())
+    // return source.replace(/hello/g, 'goodbye');
 }
 module.exports = routePruner
