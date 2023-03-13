@@ -74,6 +74,16 @@ app.get('/api/get-routes-file', (req, res) => {
                         // console.log('obj -> ', generator(routeAst.program.body[0].declarations[0].init).code)
                         node.elements.push(routeAst.program.body[0].declarations[0].init)
                     })
+                    // Fall back route added into the ast.
+                    const pageNotFoundRoute = `{
+                          path: '*',
+                          component: () => import('@/views/PageNotFound.vue')
+                    }`
+                    const pageNotFoundRouteAst = parser.parse(`const obj = ${pageNotFoundRoute}`, {
+                        sourceType: 'module'
+                    })
+                    node.elements.push(pageNotFoundRouteAst.program.body[0].declarations[0].init)
+
                 }
             }
         })
