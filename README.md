@@ -14,10 +14,5 @@ Lastly, the amount of memory consumed by Node.js and Chrome can be substantial w
 
 The solution to these problems is to only include the routes that the developer is currently working on. This approach can help us achieve several benefits, including reducing the time it takes to launch a development build, enabling faster hot module replacement, and minimizing the size of the development bundle.
 
-## Implementation
-
-The implementation of this proof of concept involves the following steps:
-
-1) 
 
 
