@@ -11,5 +11,9 @@ export default [
     {
         path: '/settings',
         component: () => import('@/views/SettingsView.vue')
+    },
+    {
+        path: '/test',
+        component: () => import('@/asdf/.vue')
     }
 ]

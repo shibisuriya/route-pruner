@@ -27,6 +27,11 @@
       font-weight: bold;
       font-size: 2rem;
     }
+    .instructions {
+      margin: 1rem 1rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
     .routes-container {
       margin-top: 2rem;
     }
@@ -43,6 +48,9 @@
     <div id="app">
       <div class="top-nav">
         <div class="row">Route Pruner - Control Panel</div>
+      </div>
+      <div class="instructions">
+        Please select the routes that you want to bundle...
       </div>
       <div class="routes-container">
         <div v-for="route of routes">
